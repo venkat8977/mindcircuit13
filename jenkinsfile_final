@@ -14,18 +14,20 @@ pipeline {
             }  
         }
 		
-		
-		
-	 stage('sonar') {
+
+    stage('sonar') {
             steps {
                 echo 'scanning project'
-                sh 'ls -ltr'
-                
-                sh ''' mvn sonar:sonar \\
-                      -Dsonar.host.url=http://3.108.254.133:9000 \\
-                      -Dsonar.login=sqa_139886d1b21a5750778890b01a07ef60ce3caa92'''
+
+                withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_TOKEN')]) {
+                    sh '''
+                    mvn sonar:sonar \
+                    -Dsonar.host.url=http://3.108.254.133:9000 \
+                    -Dsonar.token=$SONAR_TOKEN
+                    '''
+                }
             }
-    	}
+    }     
 		
 		
 		
