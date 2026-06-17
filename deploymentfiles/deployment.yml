@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: mc-app
-        image: venky005/mindcircuit:1
+        image: venky005/mindcircuit:2
         ports:
         - containerPort: 8080
 
